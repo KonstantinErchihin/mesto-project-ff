@@ -22,5 +22,9 @@ const initialCards = [
     {
       name: "Байкал",
       link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+    },
+    {
+      name: "Old Santiago Bernabeu",
+      link: "https://www.rma.ru/upload/iblock/4af/ФОТО%20БЕРНАБЕУ%201.jpg",
     }
 ];
