@@ -8,7 +8,7 @@ const modalProfile = document.querySelector('.popup_type_edit');
 const modalNewCard = document.querySelector('.popup_type_new-card');
 const buttonOpenModalProfile = document.querySelector('.profile__edit-button');
 const buttonOpenModalNewCard = document.querySelector('.profile__add-button');
-const buttonClosePopup = document.querySelectorAll('.popups__close');
+const closeButtons = document.querySelectorAll('.popup__close');
 const formElementProfile = modalProfile.querySelector('.popup__form');
 const nameInput  = formElementProfile.querySelector('.popup__input_type_name');
 const jobInput  = formElementProfile.querySelector('.popup__input_type_description');
@@ -35,7 +35,7 @@ buttonOpenModalNewCard.addEventListener('click', () => {
   openModal(modalNewCard);
 });
 
-buttonClosePopup.forEach((item) => {
+closeButtons.forEach((item) => {
   item.addEventListener("click", () => {
     const modalElement = item.closest(".popup");
     closeModal(modalElement);
