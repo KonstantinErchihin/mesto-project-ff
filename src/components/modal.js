@@ -9,15 +9,14 @@ export function closeModal(popup) {
     document.removeEventListener('keydown', closeModalEsc);
     document.removeEventListener('mousedown', closeModalOverlay);
 }
- 
+
 export function closeModalEsc(evt) {
 	if (evt.key === 'Escape') {
 		closeModal(document.querySelector('.popup_is-opened'));
 	}
-}
 
-export function closeModalOverlay(evt) {
-	if (evt.target.classList.contains('popup')) {
-		closeModal(document.querySelector('.popup_is-opened'));
-	}
-}
+    export function closeModalOverlay(evt) {
+        if (evt.target.classList.contains('popup')) {
+            closeModal(evt.target);
+        }
+    }   
