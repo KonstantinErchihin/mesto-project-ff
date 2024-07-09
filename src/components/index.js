@@ -1,6 +1,6 @@
 import '../pages/index.css'; // импорт главного файла стилей
 
-import {createCard, cardDelete, likeCard} from './card.js';
+import {createCard, deleteCard, likeCard} from './card.js';
 import {openModal, closeModal} from './modal.js';
 import {enableValidation, clearValidation} from './validation.js';
 import {getProfileInfo, getInitialCards, updateProfileInfo, addCard, getAvatar, newAvatar} from './api.js'
@@ -53,10 +53,12 @@ buttonOpenModalProfile.addEventListener('click', () => {
     jobInput.value = profileDescription.textContent;
 });
 buttonOpenModalNewCard.addEventListener('click', () => {
+    formElementCard.reset();
     openModal(modalNewCard);
     clearValidation(formElementCard, validationConfig);
 });
 buttonOpenModalNewAvatar.addEventListener('click', () => {
+    formElementAvatar.reset();
     openModal(modalNewAvatar);
     clearValidation(formElementAvatar, validationConfig);
 });
@@ -83,7 +85,6 @@ function handleFormSubmitAvatar(evt) {
         .finally(() => {
             evt.submitter.textContent = "Сохранить";
         })
-    formElementAvatar.reset();
 }
 
 formElementAvatar.addEventListener('submit', handleFormSubmitAvatar);
@@ -119,7 +120,7 @@ function handleFormSubmitCard(evt) {
     }
     addCard(newCard)
         .then((newCardData) => {
-            placesList.prepend(createCard(newCardData, newCardData.owner._id, cardDelete, likeCard, showImage));
+            placesList.prepend(createCard(newCardData, newCardData.owner._id, deleteCard, likeCard, showImage));
             closeModal(modalNewCard);
         })
         .catch((error) => {
@@ -128,7 +129,6 @@ function handleFormSubmitCard(evt) {
         .finally(() => {
             evt.submitter.textContent = 'Сохранить';
         })
-    formElementCard.reset();
 }
 
 formElementCard.addEventListener('submit', handleFormSubmitCard);
@@ -149,7 +149,7 @@ Promise.all([getProfileInfo(), getInitialCards()])
         profileDescription.textContent = userData.about;
         avatarImg.style.backgroundImage = `url(${userData.avatar})`;
         initialCards.forEach((card) => {
-            const cardAdd = createCard(card, userId, cardDelete, likeCard, showImage);
+            const cardAdd = createCard(card, userId, deleteCard, likeCard, showImage);
             placesList.append(cardAdd);
         });
     })

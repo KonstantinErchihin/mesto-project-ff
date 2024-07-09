@@ -1,6 +1,6 @@
 import {deleteMyCard, addLike, deleteLike} from './api.js'
 
-export function createCard(card, userId, cardDelete, likeCard, showImage) {
+export function createCard(card, userId, deleteCard, likeCard, showImage) {
     const cardTemplate = document.querySelector('#card-template').content;
     const itemCard = cardTemplate.querySelector('.places__item').cloneNode(true);
     const cardImage = itemCard.querySelector('.card__image');
@@ -13,7 +13,7 @@ export function createCard(card, userId, cardDelete, likeCard, showImage) {
     if (card.owner._id != userId) {
         itemCard.querySelector('.card__delete-button').remove();
     } else {
-        itemCard.querySelector('.card__delete-button').addEventListener('click', (evt) => cardDelete(evt, card));
+        itemCard.querySelector('.card__delete-button').addEventListener('click', (evt) => deleteCard(evt, card));
     }
     
     
@@ -28,7 +28,7 @@ export function createCard(card, userId, cardDelete, likeCard, showImage) {
     return itemCard;
 }
 
-export function cardDelete(evt, card) {
+export function deleteCard(evt, card) {
     const cardDel = evt.target.closest('.card');
     deleteMyCard(card._id)
         .then(() => {
